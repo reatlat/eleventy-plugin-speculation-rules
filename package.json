@@ -1,0 +1,37 @@
+{
+  "name": "eleventy-plugin-speculation-rules",
+  "version": "1.0.0",
+  "description": "Eleventy plugin to add speculation rules to your build process",
+  "main": ".eleventy.js",
+  "scripts": {
+    "build": "npx eleventy --config=./demo/.eleventy.js --input=./demo --output=./_site",
+    "dev": "npx eleventy --serve --config=./demo/.eleventy.js --input=./demo --output=./_site",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/reatlat/eleventy-plugin-speculation-rules.git"
+  },
+  "keywords": [
+    "eleventy",
+    "eleventy-plugin",
+    "11ty",
+    "speculation-rules",
+    "speculation",
+    "performance",
+    "optimization"
+  ],
+  "author": {
+    "name": "Alex Zappa",
+    "email": "alex@zappa.dev",
+    "url": "https://alex.zappa.dev/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reatlat/eleventy-plugin-speculation-rules/issues"
+  },
+  "homepage": "https://github.com/reatlat/eleventy-plugin-speculation-rules#readme",
+  "dependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  }
+}
