@@ -5,6 +5,8 @@
 
 This plugin adds support for the [Speculation Rules API](https://developer.mozilla.org/en-US/docs/Web/API/Speculation_Rules_API), which allows defining rules by which certain URLs are dynamically prefetched or prerendered based on user interaction.
 
+Demo: [https://eleventy-plugin-speculation-rules.netlify.app/](https://eleventy-plugin-speculation-rules.netlify.app/)
+
 ## Installation
 Install the plugin from [npm](https://www.npmjs.com/package/eleventy-plugin-speculation-rules):
 
