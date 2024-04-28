@@ -8,15 +8,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>11ty Plugin Speculation Rules</title>
     <meta name="description" content="This plugin adds support for the Speculation Rules API, which allows defining rules by which certain URLs are dynamically prefetched or prerendered based on user interaction.">
-    <script defer data-domain="eleventy-plugin-speculation-rules.netlify.app" src="https://plausible.io/js/script.outbound-links.file-downloads.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css" />
     <style>.github-fork-ribbon:before { background-color: #333; }</style>
 </head>
 <body class="py-14 px-8">
     <div class="prose mx-auto">
-        <h1>11ty Plugin: Speculation Rules</h1>
-        <p>This plugin adds support for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Speculation_Rules_API">Speculation Rules API</a>, which allows defining rules by which certain URLs are dynamically prefetched or prerendered based on user interaction.</p>
+        <h1 class="!mb-0">11ty Plugin: Speculation Rules</h1>
+        <p class="mt-4 flex flex-wrap gap-2">
+            <a href="https://npmjs.com/package/eleventy-plugin-speculation-rules">
+                <span class="sr-only">npm</span>
+                <img class="inline-block !my-0" src="https://img.shields.io/npm/v/eleventy-plugin-speculation-rules.svg" alt="npm">
+            </a>
+            <a href="https://npmjs.com/package/eleventy-plugin-speculation-rules">
+                <span class="sr-only">npm</span>
+                <img class="inline-block !my-0" src="https://img.shields.io/npm/dt/eleventy-plugin-speculation-rules.svg" alt="npm">
+            </a>
+            <a href="https://npmjs.com/package/eleventy-plugin-speculation-rules">
+                <span class="sr-only">license</span>
+                <img class="inline-block !my-0" src="https://img.shields.io/npm/l/eleventy-plugin-speculation-rules.svg" alt="license">
+            </a>
+        </p>
+        <p><a href="https://www.npmjs.com/package/eleventy-plugin-speculation-rules">This plugin</a> adds support for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Speculation_Rules_API">Speculation Rules API</a>, which allows defining rules by which certain URLs are dynamically prefetched or prerendered based on user interaction.</p>
         <h2>Demo</h2>
         <ul>
             <li><a class="preventDefault" href="/demo/prerender">Prerender demo</a></li>
@@ -27,7 +40,7 @@
         <p>More information about the Speculation Rules API can be found <a href="https://developer.chrome.com/blog/chrome-121-beta#speculation_rules_api">here</a>.</p>
         <p>More about <a href="https://developer.chrome.com/docs/devtools/application/debugging-speculation-rules/">Debugging speculation rules</a>.</p>
         <h2>Installation</h2>
-        <p>Install the plugin via npm:</p>
+        <p>Install <a href="https://www.npmjs.com/package/eleventy-plugin-speculation-rules">the plugin</a> via npm:</p>
         <pre><code>npm install eleventy-plugin-speculation-rules --save-dev</code></pre>
         <h2>Usage</h2>
         <p>Once installed, you can use the plugin in your Eleventy configuration file:</p>
@@ -77,8 +90,8 @@ module.exports = function(eleventyConfig) {
         <p><a href="https://github.com/reatlat/eleventy-plugin-speculation-rules/blob/main/LICENSE">MIT License</a></p>
         <hr>
         <footer>
-            <p>Built using <a href="https://11ty.dev/">{{ eleventy.generator }}</a>.</p>
-            <p>Crafted by <a href="https://alex.zappa.dev">Alex Zappa</a>.</p>
+            <p>Built using <a href="https://11ty.dev?utm_source=eleventy-plugin-speculation-rules">{{ eleventy.generator }}</a>.</p>
+            <p>Crafted by <a href="https://alex.zappa.dev?utm_source=eleventy-plugin-speculation-rules">Alex Zappa</a>.</p>
         </footer>
     </div>
     <a class="github-fork-ribbon fixed" href="https://github.com/reatlat/eleventy-plugin-speculation-rules/" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>

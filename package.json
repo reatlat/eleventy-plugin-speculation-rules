@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npx eleventy --config=./demo/.eleventy.js --input=./demo --output=./_site",
     "dev": "npx eleventy --serve --config=./demo/.eleventy.js --input=./demo --output=./_site",
-    "test": "npx eleventy --config=./demo/.eleventy.js --input=./demo --output=./_site "
+    "test": "npx eleventy --config=./demo/.eleventy.js --input=./demo --output=./_site"
   },
   "repository": {
     "type": "git",
