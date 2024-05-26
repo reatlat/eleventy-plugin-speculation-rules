@@ -65,7 +65,7 @@ module.exports = (eleventyConfig, attributes = {}) => {
     const jsonString = JSON.stringify(speculationRules);
 
     eleventyConfig.addTransform("speculation-rules", function (content, outputPath) {
-        if (outputPath.endsWith(".html")) {
+        if (outputPath && typeof outputPath === 'string' && outputPath.endsWith(".html")) {
             content = content.replace(/<\/body>/, `<script type="speculationrules">${jsonString}</script></body>`);
         }
         return content;
