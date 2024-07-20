@@ -64,9 +64,14 @@ module.exports = (eleventyConfig, attributes = {}) => {
 
     const jsonString = JSON.stringify(speculationRules);
 
+    const replaceLastInstance = (str, search, replaceWith) => {
+        const index = str.lastIndexOf(search);
+        return index !== -1 ? str.substring(0, index) + replaceWith + str.substring(index + search.length) : str;
+    }
+
     eleventyConfig.addTransform("speculation-rules", function (content, outputPath) {
         if (outputPath && typeof outputPath === 'string' && outputPath.endsWith(".html")) {
-            content = content.replace(/<\/body>/, `<script type="speculationrules">${jsonString}</script></body>`);
+            content = replaceLastInstance(content, '</body>', `<script type="speculationrules">${jsonString}</script></body>`);
         }
         return content;
     });
