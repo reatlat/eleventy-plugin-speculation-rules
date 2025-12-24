@@ -1,6 +1,6 @@
-import { parseHTML } from 'linkedom';
+const { parseHTML } = require('linkedom');
 
-export default (eleventyConfig, attributes = {}) => {
+module.exports = (eleventyConfig, attributes = {}) => {
 
     const defaultAttributes = {
         mode: 'prerender', // prefetch | prerender

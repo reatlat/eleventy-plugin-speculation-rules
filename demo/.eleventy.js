@@ -1,6 +1,6 @@
-const eleventyPluginSpeculationRules = require("../.eleventy.js");
+import eleventyPluginSpeculationRules from '../.eleventy.js';
 
-module.exports = function (eleventyConfig) {
+export default function(eleventyConfig) {
     eleventyConfig.addPlugin(eleventyPluginSpeculationRules, {
         mode: 'prefetch', // prefetch | prerender
         eagerness: 'moderate', // conservative | moderate | eager
@@ -8,4 +8,3 @@ module.exports = function (eleventyConfig) {
         exclude: []
     });
 };
-

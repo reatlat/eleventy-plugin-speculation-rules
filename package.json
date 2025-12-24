@@ -1,8 +1,16 @@
 {
   "name": "eleventy-plugin-speculation-rules",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Eleventy plugin to add speculation rules to your build process",
-  "main": ".eleventy.js",
+  "type": "module",
+  "main": ".eleventy.cjs",
+  "module": ".eleventy.js",
+  "exports": {
+    ".": {
+      "import": "./.eleventy.js",
+      "require": "./.eleventy.cjs"
+    }
+  },
   "scripts": {
     "build": "npx eleventy --config=./demo/.eleventy.js --input=./demo --output=./_site",
     "dev": "npx eleventy --serve --config=./demo/.eleventy.js --input=./demo --output=./_site",
@@ -31,7 +39,13 @@
     "url": "https://github.com/reatlat/eleventy-plugin-speculation-rules/issues"
   },
   "homepage": "https://eleventy-plugin-speculation-rules.netlify.app",
+  "peerDependencies": {
+    "@11ty/eleventy": ">=2.0.0"
+  },
   "dependencies": {
-    "@11ty/eleventy": "^2.0.1"
+    "linkedom": "^0.18.9"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2"
   }
 }

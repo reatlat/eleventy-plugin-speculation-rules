@@ -10,102 +10,132 @@
     <meta name="description" content="This plugin adds support for the Speculation Rules API, which allows defining rules by which certain URLs are dynamically prefetched or prerendered based on user interaction.">
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css" />
-    <style>.github-fork-ribbon:before { background-color: #333; }</style>
+    <style>
+        .github-fork-ribbon:before { background-color: #333; }
+        .prose :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::before,
+        .prose :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::after { content: none !important; }
+        .prose :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+            background-color: #f5f2f0;
+            padding: 0.05em 0.4em;
+            line-height: 1;
+            font-size: inherit !important;
+            border-radius: 0.2em;
+            border: 1px solid #e1e1e1;
+            display: inline !important;
+            font-family: 'Fira Code', 'Courier New', monospace;
+        }
+        .prose {
+            --tw-prose-body: #111 !important;
+        }
+    </style>
 </head>
 <body class="py-14 px-8">
-    <script>let test = '</body>';</script>
-    <div class="prose mx-auto">
-        <h1 class="!mb-0">11ty Plugin: Speculation Rules</h1>
-        <p class="mt-4 flex flex-wrap gap-2">
-            <a href="https://npmjs.com/package/eleventy-plugin-speculation-rules">
-                <span class="sr-only">npm</span>
-                <img class="inline-block !my-0" src="https://img.shields.io/npm/v/eleventy-plugin-speculation-rules.svg" alt="npm">
-            </a>
-            <a href="https://npmjs.com/package/eleventy-plugin-speculation-rules">
-                <span class="sr-only">npm</span>
-                <img class="inline-block !my-0" src="https://img.shields.io/npm/dt/eleventy-plugin-speculation-rules.svg" alt="npm">
-            </a>
-            <a href="https://npmjs.com/package/eleventy-plugin-speculation-rules">
-                <span class="sr-only">license</span>
-                <img class="inline-block !my-0" src="https://img.shields.io/npm/l/eleventy-plugin-speculation-rules.svg" alt="license">
-            </a>
-        </p>
-        <p><a href="https://www.npmjs.com/package/eleventy-plugin-speculation-rules">This plugin</a> adds support for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Speculation_Rules_API">Speculation Rules API</a>, which allows defining rules by which certain URLs are dynamically prefetched or prerendered based on user interaction.</p>
-        <h2>Demo</h2>
-        <ul>
-            <li><a class="preventDefault" href="/demo/prerender">Prerender demo</a></li>
-            <li><a class="preventDefault" href="/demo/prefetch">Prefetch demo</a></li>
-        </ul>
-        <h3>Does it work?</h3>
-        <p>Check the network tab in your browser’s developer tools to see if the page is prefetched or prerendered.</p>
-        <p>More information about the Speculation Rules API can be found <a href="https://developer.chrome.com/blog/chrome-121-beta#speculation_rules_api">here</a>.</p>
-        <p>More about <a href="https://developer.chrome.com/docs/devtools/application/debugging-speculation-rules/">Debugging speculation rules</a>.</p>
-        <h2>Installation</h2>
-        <p>Install <a href="https://www.npmjs.com/package/eleventy-plugin-speculation-rules">the plugin</a> via npm:</p>
-        <pre><code>npm install eleventy-plugin-speculation-rules --save-dev</code></pre>
-        <h2>Usage</h2>
-        <p>Once installed, you can use the plugin in your Eleventy configuration file:</p>
-<pre><code>const eleventyPluginSpeculationRules = require('@11ty/eleventy-plugin-speculation-rules');
-module.exports = function(eleventyConfig) {
-    eleventyConfig.addPlugin(eleventyPluginSpeculationRules);
-};</code></pre>
-        <h2>Configuration</h2>
-        <p>By default, the plugin will use the following configuration:</p>
-<pre><code>{
-    mode: 'prerender', // prefetch | prerender
-    eagerness: 'moderate', // conservative | moderate | eager
-    noPrerenderSelector: '.no-prerender',
-    include: [],
-    exclude: []
-}</code></pre>
-        <p>You can override the default configuration by passing an object to the plugin:</p>
-<pre><code>eleventyConfig.addPlugin(eleventyPluginSpeculationRules, {
-    mode: 'prefetch',
-    eagerness: 'eager',
-    noPrerenderSelector: '.noPrerender',
-    include: ['/blog/*'],
-    exclude: ['/blog/1']
-});</code></pre>
-        <p>A filter can be used to exclude certain URL paths from being eligible for prefetching and prerendering. Alternatively, you can add the ‘no-prerender’ CSS class to any link (<code>&lt;a&gt;</code> tag) that should not be prerendered.</p>
-        <h3>Speculation Mode</h3>
-        <ul>
-            <li>Prefetch</li>
-            <li>Prerender</li>
-        </ul>
-        <p>Prerendering will lead to faster load times than prefetching. However, in case of interactive content, prefetching may be a safer choice.</p>
-        <h3>Eagerness</h3>
-        <ul>
-            <li>Conservative (typically on click)</li>
-            <li>Moderate (typically on hover)</li>
-            <li>Eager (on slightest suggestion)</li>
-        </ul>
-        <p>The eagerness setting defines the heuristics based on which the loading is triggered. "Eager" will have the minimum delay to start speculative loads, "Conservative" increases the chance that only URLs the user actually navigates to are loaded.</p>
-        <h2>Browser support</h2>
-        <p>The Speculation Rules API is a new web API, and the functionality used by the plugin is supported in Chromium-based browsers such as Chrome, Edge, or Opera using version 121 or above. Other browsers such as Safari and Firefox will ignore the functionality with no ill effects but will not benefit from the speculative loading. Note that extensions may disable preloading by default (for example, uBlock Origin does this).</p>
-        <p>Other browsers will not see any adverse effects, however the feature will not work for those clients.</p>
-        <ul>
-            <li><a href="https://caniuse.com/mdn-html_elements_script_type_speculationrules">Browser support for the Speculation Rules API in general</a></li>
-            <li><a href="https://developer.chrome.com/blog/chrome-121-beta#speculation_rules_api">Information on document rules syntax support used by the plugin</a></li>
-        </ul>
-        <h2>License</h2>
-        <p><a href="https://github.com/reatlat/eleventy-plugin-speculation-rules/blob/main/LICENSE">MIT License</a></p>
-        <hr>
-        <footer>
-            <p>Built using <a href="https://11ty.dev?utm_source=eleventy-plugin-speculation-rules">{{ eleventy.generator }}</a>.</p>
-            <p>Crafted by <a href="https://alex.zappa.dev?utm_source=eleventy-plugin-speculation-rules">Alex Zappa</a>.</p>
-        </footer>
-    </div>
-    <a class="github-fork-ribbon fixed" href="https://github.com/reatlat/eleventy-plugin-speculation-rules/" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
+<script>let test = '</body>';</script>
+<div class="prose mx-auto">
+    <h1 class="!mb-0">11ty Plugin: Speculation Rules</h1>
+    <p class="mt-4 flex flex-wrap gap-2">
+        <a href="https://npmjs.com/package/eleventy-plugin-speculation-rules">
+            <span class="sr-only">npm</span>
+            <img class="inline-block !my-0" src="https://img.shields.io/npm/v/eleventy-plugin-speculation-rules.svg" alt="npm">
+        </a>
+        <a href="https://npmjs.com/package/eleventy-plugin-speculation-rules">
+            <span class="sr-only">npm</span>
+            <img class="inline-block !my-0" src="https://img.shields.io/npm/dt/eleventy-plugin-speculation-rules.svg" alt="npm">
+        </a>
+        <a href="https://npmjs.com/package/eleventy-plugin-speculation-rules">
+            <span class="sr-only">license</span>
+            <img class="inline-block !my-0" src="https://img.shields.io/npm/l/eleventy-plugin-speculation-rules.svg" alt="license">
+        </a>
+    </p>
+    <p><a href="https://www.npmjs.com/package/eleventy-plugin-speculation-rules">This plugin</a> adds support for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Speculation_Rules_API">Speculation Rules API</a>, which allows defining rules by which certain URLs are dynamically prefetched or prerendered based on user interaction.</p>
+    <h2>Installation</h2>
+    <p>Install the plugin from npm:</p>
+    <pre><code>npm install eleventy-plugin-speculation-rules --save-dev</code></pre>
+    <h2>Configuration</h2>
+    <ul>
+        <li><code>mode</code> - The speculation mode.<br/><small>Default: <code>prerender</code>, options: <code>prefetch</code>, <code>prerender</code></small></li>
+        <li><code>eagerness</code> - The eagerness level for speculation.<br/><small>Default: <code>moderate</code>, options: <code>conservative</code>, <code>moderate</code>, <code>eager</code></small></li>
+        <li><code>noPrerenderSelector</code> - CSS selector for links that should not be prerendered.<br/><small>Default: <code>.no-prerender</code></small></li>
+        <li><code>include</code> - Array of URL patterns to include.<br/><small>Default: <code>[]</code></small></li>
+        <li><code>exclude</code> - Array of URL patterns to exclude.<br/><small>Default: <code>[]</code></small></li>
+    </ul>
+    <p>By default, the plugin excludes <code>.zip</code> and <code>.pdf</code> files, as well as links with <code>rel="nofollow"</code>.</p>
+    <h2>Usage</h2>
+    <p>Add it to your <a href="https://www.11ty.dev/docs/config/">Eleventy Config</a> file:</p>
+    <h3>ESM (Eleventy 3.x):</h3>
+    <pre><code>import eleventyPluginSpeculationRules from 'eleventy-plugin-speculation-rules';
 
-    <script>
-        (function(){
-            document.querySelectorAll('.preventDefault').forEach(function(link) {
-                link.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    alert('This is a demo link. The page would have been prefetched or prerendered in a real-world scenario.');
-                });
+export default function (eleventyConfig) {
+    eleventyConfig.addPlugin(eleventyPluginSpeculationRules);
+};
+</code></pre>
+    <h3>CommonJS (Eleventy 2.x):</h3>
+    <pre><code>const eleventyPluginSpeculationRules = require('eleventy-plugin-speculation-rules');
+
+module.exports = function (eleventyConfig) {
+    eleventyConfig.addPlugin(eleventyPluginSpeculationRules);
+};
+</code></pre>
+    <h3>Advanced usage:</h3>
+    <pre><code>import eleventyPluginSpeculationRules from 'eleventy-plugin-speculation-rules';
+
+export default function (eleventyConfig) {
+    eleventyConfig.addPlugin(eleventyPluginSpeculationRules, {
+        mode: 'prefetch',
+        eagerness: 'eager',
+        noPrerenderSelector: '.no-prerender',
+        include: ['/blog/*'],
+        exclude: ['/admin/*']
+    });
+};
+</code></pre>
+    <h2>Speculation Mode</h2>
+    <ul>
+        <li><code>prefetch</code> - The browser will prefetch the URL when the user hovers over the link.</li>
+        <li><code>prerender</code> - The browser will prerender the URL when the user hovers over the link.</li>
+    </ul>
+    <p>Prerendering will lead to faster load times than prefetching. However, in case of interactive content, prefetching may be a safer choice.</p>
+    <h2>Speculation Eagerness</h2>
+    <ul>
+        <li><code>conservative</code> - Speculates only on click</li>
+        <li><code>moderate</code> - Speculates on hover</li>
+        <li><code>eager</code> - Speculates on slightest indication</li>
+    </ul>
+    <p>The eagerness setting defines the heuristics based on which the loading is triggered. "Eager" will have the minimum delay to start speculative loads, "Conservative" increases the chance that only URLs the user actually navigates to are loaded.</p>
+    <h2>Demo</h2>
+    <ul>
+        <li><a class="preventDefault" href="/demo/prerender">Prerender demo</a></li>
+        <li><a class="preventDefault" href="/demo/prefetch">Prefetch demo</a></li>
+    </ul>
+    <h3>Does it work?</h3>
+    <p>Check the network tab in your browser's developer tools to see if the page is prefetched or prerendered.</p>
+    <p>More information about the Speculation Rules API can be found <a href="https://developer.chrome.com/blog/chrome-121-beta#speculation_rules_api">here</a>.</p>
+    <p>More about <a href="https://developer.chrome.com/docs/devtools/application/debugging-speculation-rules/">Debugging speculation rules</a>.</p>
+    <h2>Browser support</h2>
+    <p>The Speculation Rules API is a new web API, and the functionality used by the plugin is supported in Chromium-based browsers such as Chrome, Edge, or Opera using version 121 or above. Other browsers such as Safari and Firefox will ignore the functionality with no ill effects but will not benefit from the speculative loading. Note that extensions may disable preloading by default (for example, uBlock Origin does this).</p>
+    <ul>
+        <li><a href="https://caniuse.com/mdn-html_elements_script_type_speculationrules">Browser support for the Speculation Rules API in general</a></li>
+        <li><a href="https://developer.chrome.com/blog/chrome-121-beta#speculation_rules_api">Information on document rules syntax support used by the plugin</a></li>
+    </ul>
+    <h2>License</h2>
+    <p><a href="https://github.com/reatlat/eleventy-plugin-speculation-rules/blob/main/LICENSE">MIT License</a></p>
+    <hr>
+    <footer>
+        <p>Built using <a href="https://11ty.dev?utm_source=eleventy-plugin-speculation-rules">{{ eleventy.generator }}</a>.</p>
+        <p>Crafted by <a href="https://alex.zappa.dev?utm_source=eleventy-plugin-speculation-rules">Alex Zappa</a> at <a href="https://freshjuice.dev?utm_source=eleventy-plugin-speculation-rules">FreshJuice</a>.</p>
+    </footer>
+</div>
+<a class="github-fork-ribbon fixed" href="https://github.com/reatlat/eleventy-plugin-speculation-rules/" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
+
+<script>
+    (function(){
+        document.querySelectorAll('.preventDefault').forEach(function(link) {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                alert('This is a demo link. The page would have been prefetched or prerendered in a real-world scenario.');
             });
-        })();
-    </script>
+        });
+    })();
+</script>
 </body>
 </html>
